@@ -1,30 +1,43 @@
-/* =====================================================
+/* ==================================================
    MOBILE NAVIGATION
-===================================================== */
+================================================== */
 
-const menuToggle = document.getElementById("menuToggle");
-const navMenu = document.getElementById("navMenu");
+const menuToggle =
+    document.getElementById("menuToggle");
+
+const navMenu =
+    document.getElementById("navMenu");
 
 
 if (menuToggle && navMenu) {
 
-    menuToggle.addEventListener("click", function () {
 
-        navMenu.classList.toggle("active");
+    menuToggle.addEventListener(
+        "click",
+        function () {
 
-    });
+            navMenu.classList.toggle("active");
+
+        }
+    );
 
 
-    const navLinks = navMenu.querySelectorAll("a");
+    const navLinks =
+        navMenu.querySelectorAll("a");
 
 
     navLinks.forEach(function (link) {
 
-        link.addEventListener("click", function () {
 
-            navMenu.classList.remove("active");
+        link.addEventListener(
+            "click",
+            function () {
 
-        });
+                navMenu.classList.remove("active");
+
+            }
+        );
+
 
     });
 
@@ -32,119 +45,146 @@ if (menuToggle && navMenu) {
 
 
 
-/* =====================================================
-   IMAGE VIEWER
-===================================================== */
+/* ==================================================
+   GALLERY IMAGE VIEWER
+================================================== */
+
+const galleryImages =
+    document.querySelectorAll(
+        ".gallery-item img"
+    );
+
 
 const imageViewer =
-    document.getElementById("imageViewer");
+    document.getElementById(
+        "imageViewer"
+    );
+
 
 const fullScreenImage =
-    document.getElementById("fullScreenImage");
+    document.getElementById(
+        "fullScreenImage"
+    );
+
 
 const closeViewer =
-    document.getElementById("closeViewer");
+    document.getElementById(
+        "closeViewer"
+    );
 
 
 
-/* =====================================================
-   OPEN IMAGE
-===================================================== */
+/* OPEN IMAGE */
 
-function openImage(imagePath, imageAlt) {
+function openImage(
+    imagePath,
+    imageAlt
+) {
 
-    if (!imageViewer || !fullScreenImage) {
+
+    if (
+        !imageViewer ||
+        !fullScreenImage
+    ) {
+
         return;
+
     }
 
 
-    fullScreenImage.src = imagePath;
+    fullScreenImage.src =
+        imagePath;
+
 
     fullScreenImage.alt =
-        imageAlt || "Full Screen Image";
+        imageAlt ||
+        "Gallery Image";
 
 
-    imageViewer.classList.add("show");
-
-    document.body.classList.add("no-scroll");
-
-}
+    imageViewer.classList.add(
+        "show"
+    );
 
 
-
-/* =====================================================
-   OPEN PACKAGE OF PRACTICES
-===================================================== */
-
-function openPOP(imagePath) {
-
-    openImage(
-        imagePath,
-        "Package of Practices"
+    document.body.classList.add(
+        "no-scroll"
     );
 
 }
 
 
 
-/* =====================================================
-   GALLERY IMAGE VIEWER
-===================================================== */
+/* GALLERY CLICK */
 
-const galleryImages =
-    document.querySelectorAll(".gallery-item img");
+galleryImages.forEach(
+    function (image) {
 
 
-galleryImages.forEach(function (image) {
+        image.addEventListener(
+            "click",
+            function () {
 
-    image.addEventListener("click", function () {
 
-        openImage(
-            this.src,
-            this.alt
+                openImage(
+                    this.src,
+                    this.alt
+                );
+
+
+            }
         );
 
-    });
 
-});
+    }
+);
 
 
 
-/* =====================================================
-   CLOSE IMAGE VIEWER
-===================================================== */
+/* CLOSE IMAGE */
 
 function closeImageViewer() {
 
+
     if (!imageViewer) {
+
         return;
+
     }
 
 
-    imageViewer.classList.remove("show");
+    imageViewer.classList.remove(
+        "show"
+    );
 
-    document.body.classList.remove("no-scroll");
+
+    document.body.classList.remove(
+        "no-scroll"
+    );
 
 
-    setTimeout(function () {
+    setTimeout(
+        function () {
 
-        if (fullScreenImage) {
 
-            fullScreenImage.src = "";
+            if (fullScreenImage) {
 
-        }
+                fullScreenImage.src = "";
 
-    }, 300);
+            }
+
+
+        },
+        300
+    );
 
 }
 
 
 
-/* =====================================================
-   CLOSE BUTTON
-===================================================== */
+/* CLOSE BUTTON */
 
 if (closeViewer) {
+
 
     closeViewer.addEventListener(
         "click",
@@ -155,21 +195,25 @@ if (closeViewer) {
 
 
 
-/* =====================================================
-   CLOSE WHEN CLICKING OUTSIDE IMAGE
-===================================================== */
+/* CLICK OUTSIDE IMAGE */
 
 if (imageViewer) {
+
 
     imageViewer.addEventListener(
         "click",
         function (event) {
 
-            if (event.target === imageViewer) {
+
+            if (
+                event.target ===
+                imageViewer
+            ) {
 
                 closeImageViewer();
 
             }
+
 
         }
     );
@@ -178,45 +222,54 @@ if (imageViewer) {
 
 
 
-/* =====================================================
-   ESCAPE KEY
-===================================================== */
+/* ESCAPE KEY */
 
 document.addEventListener(
     "keydown",
     function (event) {
 
-        if (event.key === "Escape") {
+
+        if (
+            event.key === "Escape"
+        ) {
 
             closeImageViewer();
 
+
             if (navMenu) {
 
-                navMenu.classList.remove("active");
+                navMenu.classList.remove(
+                    "active"
+                );
 
             }
 
         }
+
 
     }
 );
 
 
 
-/* =====================================================
+/* ==================================================
    PREVENT IMAGE DRAGGING
-===================================================== */
+================================================== */
 
 document.querySelectorAll("img")
-    .forEach(function (image) {
+    .forEach(
+        function (image) {
 
-        image.addEventListener(
-            "dragstart",
-            function (event) {
 
-                event.preventDefault();
+            image.addEventListener(
+                "dragstart",
+                function (event) {
 
-            }
-        );
+                    event.preventDefault();
 
-    });
+                }
+            );
+
+
+        }
+    );
